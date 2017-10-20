@@ -72,15 +72,26 @@ public class NewEmptyJUnitTest {
         w.until(ExpectedConditions.visibilityOfElementLocated(By.id("dnn_ctr484_Results_rgResults_ctl00")));
 
         WebElement elementTable = driver.findElement(By.id("dnn_ctr484_Results_rgResults_ctl00"));
-
-        WebElement elementTbody = elementTable.findElement(By.tagName("tbody"));
-
-        List<WebElement> elementsTR = elementTbody.findElements(By.tagName("tr"));
-        //for (WebElement el: elementsTR){
-        List<WebElement> elemetsTD = elementsTR.get(0).findElements(By.tagName("td"));
         
-        elemetsTD.get(1).findElement(By.className("caseLink")).click();
+        //Añadir navegación del paginador 
         
-        //}    
+        List<WebElement> pager = elementTable.findElements(By.xpath("//*[@id='dnn_ctr484_Results_rgResults_ctl00']/thead/tr[1]/td/table/tbody/tr/td/div[3]/a[1]"));
+
+        for (WebElement page : pager){
+            
+        page.click();
+            
+        List<WebElement> elementsTR = elementTable.findElements(By.xpath("//*[@id='dnn_ctr484_Results_rgResults_ctl00']/thead/tr[1]/td/table/tbody/tr"));
+               
+        for (WebElement label: elementsTR){
+            label.findElement(By.xpath("//*[@id='dnn_ctr484_Results_rgResults_ctl00_ctl04_lnkCaseNumber']")).click();
+            
+            //driver.navigate().back();
+        }    
+        }
+        
+        
+          
+       
     }
 }
